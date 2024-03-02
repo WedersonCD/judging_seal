@@ -1,0 +1,85 @@
+openapi: 3.0.2
+info:
+  title: Judging Seal API
+  description: API for managing moments
+  version: "0.0.0"
+servers:
+  - url: 'http://localhost:9952/judging_seal'
+paths:
+  /moments:
+    get:
+      summary: Get all moments
+      responses:
+        '200':
+          description: A list of moments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Moment'
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new moment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Moment'
+      responses:
+        '201':
+          description: The moment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Moment'
+        '400':
+          description: Bad Request
+  /moments/{moment_name}:
+    get:
+      summary: Get a moment by name
+      parameters:
+        - name: moment_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single moment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Moment'
+        '404':
+          description: Moment not found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Moment:
+      type: object
+      required:
+        - moment_name
+        - moment_rate
+      properties:
+        moment_name:
+          type: string
+          uniqueItems: true
+        moment_rate:
+          type: number
+          minimum: 1
+          maximum: 5
+        moment_createdAt:
+          type: string
+          format: date-time
+          default: "2023-01-01T00:00:00Z"
+        moment_updatedAt:
+          type: string
+          format: date-time
+        moment_hashtags:
+          type: array
+          items:
+            type: string
