@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     user_name: { type: String, required: true, unique: true },
     user_psw: { type: String, required: true },
+    user_hash: { type: String, required: true },
     user_createdAt: { type: Date, default: Date.now() },
     user_updatedAt: { type: Date },
     moment_lastest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Moment" }]
