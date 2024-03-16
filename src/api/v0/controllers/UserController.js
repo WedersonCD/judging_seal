@@ -28,6 +28,7 @@ UserController.getUserByName = async (req, res) => {
 
 UserController.createUser = async (req, res) => {
 
+    console.log('creating new user...')
     const user_name = req.body.user_name;
     const user_psw  = req.body.user_psw;
 
