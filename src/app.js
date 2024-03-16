@@ -10,6 +10,9 @@ const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 const momentRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/MomentRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 
+//Middleware
+const authMiddleware = require('./middleware/authMiddleware');
+
 const app = express();
 
 app.use(express.json());
