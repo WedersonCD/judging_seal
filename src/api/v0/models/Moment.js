@@ -20,8 +20,6 @@ momentSchema.pre('save', function (next) {
 momentSchema.pre('save', function (next) {
     const moment = this;
     
-    console.log(this.user.findByIdAndUpdate)
-
     //*
     const User = mongoose.model('User');
 

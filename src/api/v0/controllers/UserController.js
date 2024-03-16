@@ -46,4 +46,31 @@ UserController.createUser = async (req, res) => {
     }
 };
 
+
+UserController.loginUser = async(req, res) =>{
+    console.log('Loggin user..');
+    const user_name = req.body.user_name;
+    const user_psw  = req.body.user_psw;
+
+    try{
+        const logged_user = await UserModel.findOne({user_name: user_name});
+
+        if (!logged_user)
+            return res.status(404).json({ message: 'login fail, user not found' });
+
+        const user_psw_match = await UTILS.compareBcrypt(user_psw,logged_user.user_psw);
+
+        if (!user_psw_match)
+            return res.status(401).json({ message: 'Password not matched' });
+
+        logged_user.login()
+        res.status(201).json(logged_user)
+    
+    }catch(err){
+        res.status(400).json({message: err.message})
+    }
+
+}
+
+
 module.exports = UserController;

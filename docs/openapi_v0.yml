@@ -108,6 +108,29 @@ paths:
           description: User not found
         '500':
           description: Internal Server Error
+  /users/login:
+    post:
+      summary: User loggin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The user created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Password not match          
+        '404':
+          description: User not found
+
 components:
   schemas:
     Moment:
