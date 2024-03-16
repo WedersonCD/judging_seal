@@ -11,6 +11,8 @@ MomentController.getAllMoments = async (req, res) => {
     }
 };
 
+
+
 MomentController.getMomentByName = async (req, res) => {
     try {
         const momentName = req.params.moment_name;

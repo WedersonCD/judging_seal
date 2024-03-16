@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const momentSchema = new mongoose.Schema({
-    moment_name: { type: String, required: true, unique: true },
+    moment_name: { type: String, required: true },
     moment_rate: { type: Number, required: true, min: 1, max: 5 },
     moment_createdAt: { type: Date, default: Date.now() },
     moment_updatedAt: { type: Date },

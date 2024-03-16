@@ -21,7 +21,8 @@ mongoService();
 
 app.use('/',apiDocsRoutes)
 app.use('/judging_seal/api-docs',apiDocsRoutes)
-app.use('/judging_seal/moments',momentRoutes)
+app.use('/judging_seal/moments',authMiddleware,momentRoutes)
+
 app.use('/judging_seal/users',userRoutes)
 
 
