@@ -62,8 +62,11 @@ UserController.loginUser = async(req, res) =>{
 
         if (!user_psw_match)
             return res.status(401).json({ message: 'Password not matched' });
+        
+        const token = jwt.sign({user_name:user_name,user_psw:user_psw}, process.env.JWT_SECRET);
 
         logged_user.login()
+        res.cookie('user_token',token)
         res.status(201).json(logged_user)
     
     }catch(err){
