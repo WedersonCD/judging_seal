@@ -37,7 +37,7 @@ UserController.createUser = async (req, res) => {
         user_psw: await UTILS.hashText(user_psw),
         user_hash: await UTILS.hashText([user_name,user_psw])
     });
-
+    
     try {
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);

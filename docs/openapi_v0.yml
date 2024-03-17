@@ -6,6 +6,22 @@ info:
 servers:
   - url: 'http://localhost:9952/judging_seal'
 paths:
+  /tokens/baerer_token:
+    post:
+      summary: Generate token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'              
   /moments:
     get:
       summary: Get all moments

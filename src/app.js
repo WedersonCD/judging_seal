@@ -9,15 +9,16 @@ const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 //routes
 const momentRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/MomentRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
+const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
 
 //Middleware
-const authMiddleware = require('./middleware/authMiddleware');
+const authMiddleware = require('./api/v0/middleware/authMiddleware');
 
 const app = express();
 
 app.use(express.json());
-app.use(helmet())
-app.use(cors());
+//app.use(helmet())
+//app.use(cors());
 
 //connecto to mongodb
 mongoService();
@@ -25,8 +26,10 @@ mongoService();
 app.use('/',apiDocsRoutes)
 app.use('/judging_seal/api-docs',apiDocsRoutes)
 app.use('/judging_seal/moments',authMiddleware,momentRoutes)
-
 app.use('/judging_seal/users',userRoutes)
+app.use('/judging_seal/utils',utilsRoutes)
+
+
 
 
 const port = process.env.SERVICE_PORT || 9952

@@ -21,19 +21,24 @@ userSchema.pre('save', function (next) {
 });
 
 
-/*
 
-//makes sure that wouldn't be more then 5 moments on the moment_lastest property
-userSchema.pre('updateOne', function (next) {
-    const update = this.getUpdate();
+userSchema.methods.updateLastestMoments = (moment)=>{
 
-    if (update && update.$push && update.$push.moment_lastest && this.moment_lastest.length >= 5) {
-        const removeMoment = this.moment_lastest.shift();
+    try{
+        const user = moment.user;
+
+        if(user.moment_lastest.length >= 5)
+            user.moment_lastest.shift();
+        
+        user.moment_lastest.push(moment)
+
+        user.save()
+    }catch(err){
+        console.log('err: ',err)
     }
 
-    next();
-});
-/*/
+
+};
 
 const User = mongoose.model('User', userSchema);
 

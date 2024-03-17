@@ -18,13 +18,12 @@ momentSchema.pre('save', function (next) {
 });
 
 momentSchema.pre('save', function (next) {
-    const moment = this;
-    
-    //*
-    const User = mongoose.model('User');
+    this.user.updateLastestMoments(this)
+    next();
 
-    User.findByIdAndUpdate(
-        moment.user._id,
+    /*
+    User.findOneAndUpdate(
+        {_id: moment.user._id},
         { moment_lastest: moment._id },
         { new: true },
         (err, user) => {
