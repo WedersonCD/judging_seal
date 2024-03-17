@@ -1,11 +1,27 @@
 openapi: 3.0.2
 info:
   title: Judging Seal API
-  description: API for managing moments
+  description: API for managing moments and users
   version: "0.0.0"
 servers:
   - url: 'http://localhost:9952/judging_seal'
 paths:
+  /tokens/baerer_token:
+    post:
+      summary: Generate token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'              
   /moments:
     get:
       summary: Get all moments
@@ -57,6 +73,80 @@ paths:
           description: Moment not found
         '500':
           description: Internal Server Error
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The user created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+  /users/{user_name}:
+    get:
+      summary: Get a user by name
+      parameters:
+        - name: user_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+  /users/login:
+    post:
+      summary: User loggin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The user created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Password not match          
+        '404':
+          description: User not found
+
 components:
   schemas:
     Moment:
@@ -83,3 +173,14 @@ components:
           type: array
           items:
             type: string
+    User:
+      type: object
+      required:
+        - user_name
+        - user_psw
+      properties:
+        user_name:
+          type: string
+          uniqueItems: true
+        user_psw:
+          type: string
