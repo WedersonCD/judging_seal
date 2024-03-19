@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 
 const utils = {}
 
-
 utils.hashText = async (strings) =>{
     
     if(typeof(strings)=='object')

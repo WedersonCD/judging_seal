@@ -12,10 +12,12 @@ const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
 
 //Middleware
-const authMiddleware = require('./api/v0/middleware/authMiddleware');
+const authMiddleware        = require('./api/v0/middleware/authMiddleware');
+const parseCookieMiddleWare = require('./api/v0/middleware/parseCookieMiddleWare');
 
 const app = express();
 
+app.use(parseCookieMiddleWare);
 app.use(express.json());
 //app.use(helmet())
 //app.use(cors());
@@ -28,9 +30,6 @@ app.use('/judging_seal/api-docs',apiDocsRoutes)
 app.use('/judging_seal/moments',authMiddleware,momentRoutes)
 app.use('/judging_seal/users',userRoutes)
 app.use('/judging_seal/utils',utilsRoutes)
-
-
-
 
 const port = process.env.SERVICE_PORT || 9952
 app.listen(port, () => console.log(`Storer Service listening on port ${port}`));

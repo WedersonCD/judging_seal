@@ -4,15 +4,27 @@ const UTILS = require('../../../utils.js');
 
 
 
+function getTokenFromReq(req) {
+
+    let tokenFromCookie = null;
+    let tokenFromAuthorization = null;
+
+    if(req.parsedCookies)
+        tokenFromCookie =  req.parsedCookies.user_token;
+
+    if(req.headers.authorization)
+        tokenFromAuthorization = req.headers.authorization.split(' ')[1];
+
+    return tokenFromCookie || tokenFromAuthorization
+}
+
+
 async function authJWMiddleware(req, res, next) {
-    // Retrieve token from the 'Authorization' header
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader)
+    
+    const token = getTokenFromReq(req);
+    
+    if(!token)
         return res.status(401).json({ message: "token did not found" }); // Unauthorized if no token is provided
-
-
-    const token = authHeader.split(' ')[1]; // Bearer <token>
 
     try {
         const user = jwt.verify(token, process.env.JWT_SECRET);
