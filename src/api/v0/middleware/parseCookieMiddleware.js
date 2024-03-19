@@ -5,7 +5,6 @@ async function parseCookieMiddleware(req, res, next) {
     if(!headerCookies)
         return next();
 
-    console.log(headerCookies)
     const parsedCookies = {}    
 
     headerCookies.split(';').forEach(pair =>{
