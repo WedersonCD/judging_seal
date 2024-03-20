@@ -6,14 +6,16 @@ const apiDocsRoutes = require('./api/api_docs_routes')
 
 const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 
+console.log('---------->',__dirname)
+
 //routes
 const momentRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/MomentRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
 
 //Middleware
-const authMiddleware        = require('./api/v0/middleware/authMiddleware');
-const parseCookieMiddleWare = require('./api/v0/middleware/parseCookieMiddleWare');
+const authMiddleware        = require('./api/v'+API_VERSION_LTS+'/middleware/AuthMiddleware');
+const parseCookieMiddleWare = require('./api/v'+API_VERSION_LTS+'/middleware/ParseCookieMiddleware');
 
 
 const app = express();
