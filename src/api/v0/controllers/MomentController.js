@@ -34,7 +34,8 @@ MomentController.createMoment = async (req, res) => {
         user: req.user,
         moment_name: req.body.moment_name,
         moment_rate: req.body.moment_rate,
-        moment_hashtags: req.body.moment_hashtags
+        moment_hashtags: req.body.moment_hashtags,
+        moment_description: req.body.moment_description || ''
     });
 
     try {
