@@ -7,6 +7,7 @@ const momentSchema = new mongoose.Schema({
     moment_updatedAt: { type: Date },
     moment_hashtags: [mongoose.Schema.Types.String],
     moment_isOnLastest: { type: Boolean, default: true },
+    moment_description: {type: String, default:''},
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
