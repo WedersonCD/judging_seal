@@ -29,10 +29,10 @@ app.use(express.json());
 mongoService();
 
 app.use('/',apiDocsRoutes)
-app.use('/judging_seal/api-docs',apiDocsRoutes)
-app.use('/judging_seal/moments',authMiddleware,momentRoutes)
-app.use('/judging_seal/users',userRoutes)
-app.use('/judging_seal/utils',utilsRoutes)
+app.use('/api-docs',apiDocsRoutes)
+app.use('/moments',authMiddleware,momentRoutes)
+app.use('/users',userRoutes)
+app.use('/utils',utilsRoutes)
 
 const port = process.env.SERVICE_PORT || 9952
 app.listen(port, () => console.log(`Storer Service listening on port ${port}`));
