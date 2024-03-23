@@ -6,8 +6,6 @@ const apiDocsRoutes = require('./api/api_docs_routes')
 
 const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 
-console.log('---------->',__dirname)
-
 //routes
 const sealRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/SealRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
