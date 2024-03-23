@@ -12,17 +12,17 @@ SealController.getAllSeals = async (req, res) => {
 };
 
 SealController.deleteSealById = async(req, res)=>{
+    
     try {
-
-        if(!req._id)
-            res.status(400).json({message: 'property _id is missing'});
+        const sealId =req.query.sealId;
         
-        const sealId =req._id; 
+        if(!sealId)
+            return res.status(400).json({message: 'property _id is missing'});
         
         const deletedSeal = await SealModel.findByIdAndDelete(sealId);
 
         if(!deletedSeal)
-            res.status(404).json({message: 'Seal not found with id:'+sealId})
+            return res.status(404).json({message: 'Seal not found with id:'+sealId})
 
         res.status(200).json({message: 'deleted with sucess'})
 
