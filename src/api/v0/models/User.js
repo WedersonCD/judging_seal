@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     user_hash: { type: String, required: true },
     user_createdAt: { type: Date, default: Date.now() },
     user_updatedAt: { type: Date },
-    moment_lastest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Moment" }],
+    seal_lastest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Seal" }],
     user_loginAt: { type: Date }
 })
 
@@ -22,15 +22,15 @@ userSchema.pre('save', function (next) {
 
 
 
-userSchema.methods.updateLastestMoments = (moment)=>{
+userSchema.methods.updateLastestSeals = (seal)=>{
 
     try{
-        const user = moment.user;
+        const user = seal.user;
 
-        if(user.moment_lastest.length >= 5)
-            user.moment_lastest.shift();
+        if(user.seal_lastest.length >= 5)
+            user.seal_lastest.shift();
         
-        user.moment_lastest.push(moment)
+        user.seal_lastest.push(seal)
 
         user.save()
     }catch(err){

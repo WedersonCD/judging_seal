@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: Judging Seal API
-  description: API for managing moments and users
+  description: API for managing seals and users
   version: "0.0.0"
 servers:
   - url: 'http://localhost:9952/judging_seal'
@@ -22,55 +22,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'              
-  /moments:
+  /seals:
     get:
-      summary: Get all moments
+      summary: Get all seals
       responses:
         '200':
-          description: A list of moments
+          description: A list of seals
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Moment'
+                  $ref: '#/components/schemas/Seal'
         '500':
           description: Internal Server Error
     post:
-      summary: Create a new moment
+      summary: Create a new seal
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Moment'
+              $ref: '#/components/schemas/Seal'
       responses:
         '201':
-          description: The moment created successfully
+          description: The seal created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Moment'
+                $ref: '#/components/schemas/Seal'
         '400':
           description: Bad Request
-  /moments/{moment_name}:
+  /seals/{seal_name}:
     get:
-      summary: Get a moment by name
+      summary: Get a seal by name
       parameters:
-        - name: moment_name
+        - name: seal_name
           in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: A single moment
+          description: A single seal
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Moment'
+                $ref: '#/components/schemas/Seal'
         '404':
-          description: Moment not found
+          description: Seal not found
         '500':
           description: Internal Server Error
   /users:
@@ -149,27 +149,27 @@ paths:
 
 components:
   schemas:
-    Moment:
+    Seal:
       type: object
       required:
-        - moment_name
-        - moment_rate
+        - seal_name
+        - seal_rate
       properties:
-        moment_name:
+        seal_name:
           type: string
           uniqueItems: true
-        moment_rate:
+        seal_rate:
           type: number
           minimum: 1
           maximum: 5
-        moment_createdAt:
+        seal_createdAt:
           type: string
           format: date-time
           default: "2023-01-01T00:00:00Z"
-        moment_updatedAt:
+        seal_updatedAt:
           type: string
           format: date-time
-        moment_hashtags:
+        seal_hashtags:
           type: array
           items:
             type: string

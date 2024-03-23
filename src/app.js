@@ -9,7 +9,7 @@ const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 console.log('---------->',__dirname)
 
 //routes
-const momentRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/MomentRouter')
+const sealRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/SealRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
 
@@ -30,7 +30,7 @@ mongoService();
 
 app.use('/',apiDocsRoutes)
 app.use('/api-docs',apiDocsRoutes)
-app.use('/moments',authMiddleware,momentRoutes)
+app.use('/seals',authMiddleware,sealRoutes)
 app.use('/users',userRoutes)
 app.use('/utils',utilsRoutes)
 
