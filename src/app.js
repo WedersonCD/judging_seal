@@ -10,6 +10,7 @@ const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 const sealRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/SealRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
+const sealTemplateRoutes = require('./api/v'+API_VERSION_LTS+'/routes/sealTemplateRouter')
 
 //Middleware
 const authMiddleware        = require('./api/v'+API_VERSION_LTS+'/middleware/AuthMiddleware');
@@ -30,6 +31,8 @@ app.use('/',apiDocsRoutes)
 app.use('/api-docs',apiDocsRoutes)
 app.use('/seals',authMiddleware,sealRoutes)
 app.use('/users',userRoutes)
+app.use('/seal-template',sealTemplateRoutes)
+
 app.use('/utils',utilsRoutes)
 
 const port = process.env.SERVICE_PORT || 9952
