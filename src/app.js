@@ -10,7 +10,7 @@ const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 const sealRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/SealRouter')
 const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
 const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
-const sealTemplateRoutes = require('./api/v'+API_VERSION_LTS+'/routes/sealTemplateRouter')
+const sealTemplateRoutes = require('./api/v'+API_VERSION_LTS+'/routes/SealTemplateRouter')
 
 //Middleware
 const authMiddleware        = require('./api/v'+API_VERSION_LTS+'/middleware/AuthMiddleware');
