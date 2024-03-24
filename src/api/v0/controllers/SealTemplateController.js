@@ -28,6 +28,11 @@ SealTemplateController.createSealTemplate = async (req, res) => {
 
         const savedSealTemplate = await newSealTemplate.save();
 
+        if(!savedSealTemplate || savedSealTemplate.length==0){
+            console.error('Error in creat seal template:',savedSealTemplate)
+            res.status(500).json({ message:savedSealTemplate })
+        }
+
         res.status(201).json({ sealTemplate: savedSealTemplate});
 
     } catch (err) {
