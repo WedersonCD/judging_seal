@@ -48,6 +48,20 @@ SealController.getSealByName = async (req, res) => {
     }
 };
 
+SealController.opeanOcean = async(req,res)=>{
+    try {
+
+        const seals = await SealModel.find();
+        if(!seals)
+            res.status(400).send();
+        
+        res.status(200).json(seals);
+
+    }catch{
+        res.status(500).json({ message: err.message });
+    }
+}
+
 SealController.createSeal = async (req, res) => {
     
     const newSeal = new SealModel({

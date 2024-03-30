@@ -1,4 +1,4 @@
-const SealTemplateModel = require('../models/SealTemplate');
+﻿const SealTemplateModel = require('../models/SealTemplate');
 const UTILS = require('../../../utils.js');
 const jwt = require('jsonwebtoken');
 
