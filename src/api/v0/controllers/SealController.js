@@ -62,6 +62,39 @@ SealController.opeanOcean = async(req,res)=>{
     }
 }
 
+SealController.updateSeal = async (req, res) => {
+    
+    try {
+
+        const seal_id = req.body?._id;
+        const user_id = req.user?._id;
+
+        if(!seal_id)
+            return res.status(400).json({message: 'request body property _id not found'});
+        
+        if(!user_id)
+            return res.status(400).json({message: 'request head auth user not found'});
+
+        const seal = await SealModel.findOne({_id:seal_id, user:user_id});
+
+        if(!seal)
+            return res.status(404).json({message: 'seal not found'});
+
+        //update the propertys.
+        seal.seal_name          = req.body.seal_name        || seal.seal_name       
+        seal.seal_rate          = req.body.seal_rate        || seal.seal_rate       
+        seal.seal_hashtags      = req.body.seal_hashtags    || seal.seal_hashtags   
+        seal.seal_description   = req.body.seal_description || seal.seal_description
+        
+        await seal.save()
+
+        res.status(201).json(seal);
+        
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 SealController.createSeal = async (req, res) => {
     
     const newSeal = new SealModel({
@@ -79,5 +112,6 @@ SealController.createSeal = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+
 
 module.exports = SealController;
