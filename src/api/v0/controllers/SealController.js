@@ -33,16 +33,18 @@ SealController.deleteSealById = async(req, res)=>{
     }
 }
 
-SealController.getSealByName = async (req, res) => {
+SealController.getSealById = async (req, res) => {
+
     try {
-        const sealName = req.params.seal_name;
-        const seal = await SealModel.findById(sealName);
+        const sealId = req.params.sealId;
+        const seal = await SealModel.findById(sealId);
 
         if (!seal) {
             return res.status(404).json({ message: 'Seal not found' });
         }
 
         res.status(200).json(seal);
+        
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
