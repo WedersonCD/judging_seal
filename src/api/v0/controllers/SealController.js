@@ -43,17 +43,18 @@ SealController.getSealById = async (req, res) => {
             return res.status(404).json({ message: 'Seal not found' });
         }
 
-        res.status(200).json(seal);
-        
+        return res.status(200).json(seal);
+
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
 
-SealController.opeanOcean = async(req,res)=>{
-    try {
+SealController.openOcean = async(req,res)=>{
 
+    try {
         const seals = await SealModel.find();
+
         if(!seals)
             res.status(400).send();
         
@@ -90,7 +91,7 @@ SealController.updateSeal = async (req, res) => {
         
         await seal.save()
 
-        res.status(201).json(seal);
+        return res.status(201).json(seal);
         
     } catch (err) {
         res.status(400).json({ message: err.message });
