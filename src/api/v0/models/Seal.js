@@ -18,26 +18,6 @@ sealSchema.pre('save', function (next) {
     next();
 });
 
-sealSchema.pre('save', function (next) {
-    this.user.updateLastestSeals(this)
-    next();
-
-    /*
-    User.findOneAndUpdate(
-        {_id: seal.user._id},
-        { seal_lastest: seal._id },
-        { new: true },
-        (err, user) => {
-            if (err) {
-                next(err);
-            } else {
-                next();
-            }
-        }
-    );
-    //*/
-
-});
 
 /*
 sealSchema.pre('deleteOne', function (next) {
