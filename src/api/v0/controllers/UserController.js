@@ -13,16 +13,16 @@ UserController.getAllUsers = async (req, res) => {
     }
 };
 
-UserController.getUserByName = async (req, res) => {
+UserController.getUserById = async (req, res) => {
     try {
-        const userName = req.params.user_name;
-        const user = await UserModel.findById(userName);
+        const userId = req.params.userId;
+        const user = await UserModel.findById(userId);
 
-        if (!user) {
+        if (!user)
             return res.status(404).json({ message: 'User not found' });
-        }
-
+        
         res.status(200).json(user);
+        
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
