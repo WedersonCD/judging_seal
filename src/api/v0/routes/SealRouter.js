@@ -1,11 +1,12 @@
 const Seal = require('../controllers/SealController');
 const router = require('express').Router();
 
-router.post('/',Seal.createSeal);
 router.get('/',Seal.getAllSeals);
-router.get('/:seal-name',Seal.getSealByName);
-router.delete('/',Seal.deleteSealById);
-router.get('/opean-ocean',Seal.opeanOcean);
+router.get('/open-ocean',Seal.openOcean);
+router.get('/:sealId',Seal.getSealById);
 
+router.post('/',Seal.createSeal);
+router.put('/:sealId',Seal.updateSeal);
+router.delete('/',Seal.deleteSealById);
 
 module.exports = router;

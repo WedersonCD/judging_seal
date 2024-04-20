@@ -22,7 +22,7 @@ function getTokenFromReq(req) {
 async function authJWMiddleware(req, res, next) {
     
     const token = getTokenFromReq(req);
-    
+
     if(!token)
         return res.status(401).json({ message: "token did not found" }); // Unauthorized if no token is provided
 
