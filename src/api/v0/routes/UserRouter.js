@@ -5,6 +5,6 @@ router.post('/',User.createUser);
 router.post('/login',User.loginUser);
 
 router.get('/',User.getAllUsers);
-
+router.get('/:userId',User.getUserById);
 
 module.exports = router;
