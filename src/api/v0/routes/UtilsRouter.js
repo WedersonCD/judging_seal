@@ -1,7 +1,9 @@
-const Utils = require('../controllers/UtilsController');
-const router = require('express').Router();
+import Utils from '../controllers/UtilsController';
+import express from 'express';
+
+const router = express.Router();
 
 router.post('/baerer_token',Utils.getBaererToken);
 
 
-module.exports = router;
+export default  router;

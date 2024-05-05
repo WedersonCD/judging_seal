@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const UtilsController ={}
 
@@ -18,5 +18,4 @@ UtilsController.getBaererToken = (req,res) =>{
 
 }
 
-
-module.exports = UtilsController;
+export default  UtilsController;

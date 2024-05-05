@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     user_name: { type: String, required: true, unique: true },
@@ -10,17 +10,10 @@ const userSchema = new mongoose.Schema({
     user_loginAt: { type: Date }
 })
 
-userSchema.methods.login = () => {
-    this.user_loginAt = new Date();
-};
-
-
 userSchema.pre('save', function (next) {
     this.user_updatedAt = new Date();
     next();
 });
-
-
 
 userSchema.methods.updateLastestSeals = (seal)=>{
 
@@ -37,9 +30,8 @@ userSchema.methods.updateLastestSeals = (seal)=>{
         console.log('err: ',err)
     }
 
-
 };
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default  User;

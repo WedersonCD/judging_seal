@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const sealSchema = new mongoose.Schema({
     seal_name: { type: String, required: true },
@@ -41,4 +41,4 @@ sealSchema.pre('deleteOne', function (next) {
 
 const Seal = mongoose.model('Seal', sealSchema);
 
-module.exports = Seal;
+export default  Seal;

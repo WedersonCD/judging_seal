@@ -1,28 +1,23 @@
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const mongoService  = require('./services/mongoService')
-const apiDocsRoutes = require('./api/api_docs_routes')
-
-const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
+import express, { json } from 'express';
+import mongoService from './services/mongoService.js';
+import apiDocsRoutes from './api/api_docs_routes.js';
 
 //routes
-const sealRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/SealRouter')
-const userRoutes  = require('./api/v'+API_VERSION_LTS+'/routes/UserRouter')
-const utilsRoutes = require('./api/v'+API_VERSION_LTS+'/routes/UtilsRouter')
-const sealTemplateRoutes = require('./api/v'+API_VERSION_LTS+'/routes/SealTemplateRouter')
+import sealRoutes from `./api/v0/routes/SealRouter.js`;
+import userRoutes from `./api/v0/routes/UserRouter.js`;
+import utilsRoutes from `./api/v0/routes/UtilsRouter.js`;
+import sealTemplateRoutes from `./api/v0/routes/SealTemplateRouter.js`;
 
 //Middleware
-const authMiddleware        = require('./api/v'+API_VERSION_LTS+'/middleware/AuthMiddleware');
-const parseCookieMiddleWare = require('./api/v'+API_VERSION_LTS+'/middleware/ParseCookieMiddleware');
+import authMiddleware from `./api/v0/middleware/AuthMiddleware.js`;
+import parseCookieMiddleware from `./api/v0/middleware/ParseCookieMiddleware.js`;
+
 
 
 const app = express();
 
-app.use(parseCookieMiddleWare);
-app.use(express.json());
-//app.use(helmet())
-//app.use(cors());
+app.use(parseCookieMiddleware);
+app.use(json());
 
 //connecto to mongodb
 mongoService();
