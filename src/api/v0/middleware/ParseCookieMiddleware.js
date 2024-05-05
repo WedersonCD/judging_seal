@@ -1,4 +1,4 @@
-async function parseCookieMiddleware(req, res, next) {
+export default async function parseCookieMiddleware(req, res, next) {
     
     const headerCookies = req.headers.cookie;
 
@@ -18,5 +18,3 @@ async function parseCookieMiddleware(req, res, next) {
     req.parsedCookies = parsedCookies
     next();
 }    
-
-module.exports = parseCookieMiddleware;

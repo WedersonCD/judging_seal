@@ -1,6 +1,4 @@
-﻿const SealTemplateModel = require('../models/SealTemplate');
-const UTILS = require('../../../utils.js');
-const jwt = require('jsonwebtoken');
+﻿import SealTemplateModel from '../models/SealTemplate';
 
 const SealTemplateController = {}
 
@@ -41,4 +39,4 @@ SealTemplateController.createSealTemplate = async (req, res) => {
 
 };
 
-module.exports = SealTemplateController;
+export default  SealTemplateController;

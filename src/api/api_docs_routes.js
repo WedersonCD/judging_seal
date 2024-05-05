@@ -1,6 +1,9 @@
-const router = require('express').Router();
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
+import express from 'express';
+const router = express.Router();
+
+import swaggerUi from 'swagger-ui-express';
+
+import YAML from 'yamljs';
 
 const API_VERSION_LTS = process.env.API_VERSION_LTS || '0'
 
@@ -15,4 +18,4 @@ router.use('/v0', swaggerUi.serve);
 router.get('/v0', swaggerUi.setup(swaggerDocumentV0));
 
 
-module.exports =router;
+export default router;

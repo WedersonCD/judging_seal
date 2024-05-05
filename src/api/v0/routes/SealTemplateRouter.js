@@ -1,8 +1,9 @@
-const SealTemplate = require('../controllers/SealTemplateController');
-const router = require('express').Router();
+import SealTemplate from '../controllers/SealTemplateController';
+import express from 'express';
+const router = express.Router();
 
 router.post('/',SealTemplate.createSealTemplate);
 router.get('/',SealTemplate.getAllSealTemplates);
 
 
-module.exports = router;
+export default  router;

@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 const utils = {}
 
@@ -20,4 +20,4 @@ utils.compareBcrypt = async (strings,hash) =>{
 
 }
 
-module.exports = utils
+export default utils;

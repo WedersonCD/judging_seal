@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
 const sealTemplateSchema = new mongoose.Schema({
     sealTemplate_question: { type: String, required: true },
@@ -9,4 +9,4 @@ const sealTemplateSchema = new mongoose.Schema({
 
 const SealTemplate = mongoose.model('SealTemplate', sealTemplateSchema);
 
-module.exports = SealTemplate;
+export default  SealTemplate;

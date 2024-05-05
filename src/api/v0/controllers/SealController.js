@@ -1,4 +1,4 @@
-const SealModel = require('../models/Seal');
+import SealModel from '../models/Seal';
 
 const SealController = {}
 
@@ -68,7 +68,6 @@ SealController.openOcean = async(req,res)=>{
 SealController.updateSeal = async (req, res) => {
     
     try {
-        console.log(req.body)
         const seal_id = req.body?._id;
         const user_id = req.user?._id;
 
@@ -117,4 +116,4 @@ SealController.createSeal = async (req, res) => {
 };
 
 
-module.exports = SealController;
+export default  SealController;

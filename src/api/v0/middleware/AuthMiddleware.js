@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const UserModel = require('../models/User.js')
-const UTILS = require('../../../utils.js');
+import jwt from 'jsonwebtoken';
+import UserModel from '../models/User.js';
+import UTILS from '../../../utils.js';
 
 
 
@@ -19,7 +19,7 @@ function getTokenFromReq(req) {
 }
 
 
-async function authJWMiddleware(req, res, next) {
+export default async function authJWMiddleware(req, res, next) {
     
     const token = getTokenFromReq(req);
 
@@ -54,4 +54,3 @@ async function authJWMiddleware(req, res, next) {
     }
 
 }
-module.exports = authJWMiddleware;
