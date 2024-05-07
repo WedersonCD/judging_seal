@@ -33,17 +33,21 @@ UserController.createUser = async (req, res) => {
     console.log('creating new user...')
     try {
 
+        const user_email = req.body.user_email;
         const user_name = req.body.user_name;
         const user_psw = req.body.user_psw;
+        const user_nickName = req.body.user_nickName || req.body.user_name
 
         const newUser = new UserModel({
+            user_email: user_email,
             user_name: user_name,
+            user_nickName: user_nickName,
             user_psw: await UTILS.hashText(user_psw),
-            user_hash: await UTILS.hashText([user_name, user_psw])
+            user_hash: await UTILS.hashText([user_email, user_psw])
         });
 
         const savedUser = await newUser.save();
-        const token = jwt.sign({ user_name: user_name, user_psw: user_psw }, process.env.JWT_SECRET);
+        const token = jwt.sign({ user_email: user_email, user_psw: user_psw }, process.env.JWT_SECRET);
 
         res.cookie('user_token', token);
         res.status(201).json({ user: savedUser, token: token });
