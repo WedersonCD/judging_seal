@@ -32,10 +32,10 @@ export default async function authJWMiddleware(req, res, next) {
         if (!user)
             return res.sendStatus(403); // Forbidden if error occurs
 
-        const user_name = user.user_name;
+        const user_email = user.user_email;
         const user_psw = user.user_psw;
 
-        const logged_user = await UserModel.findOne({ user_name: user_name });
+        const logged_user = await UserModel.findOne({ user_email: user_email });
 
         if (!logged_user)
             return res.status(404).json({ message: 'login fail, user not found' });
