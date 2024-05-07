@@ -6,7 +6,7 @@ UtilsController.getBaererToken = (req,res) =>{
 
     try {
 
-        const userPayload = {user_name:req.body.user_name,user_psw:req.body.user_psw}
+        const userPayload = {user_email:req.body.user_email,user_psw:req.body.user_psw}
         const token = jwt.sign(userPayload, process.env.JWT_SECRET);
 
         res.status(200).json({token: token})
