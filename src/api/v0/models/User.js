@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+    user_email: { type: String, required: true, unique: true },
     user_name: { type: String, required: true, unique: true },
+    user_nickName: { type: String, required: true },
     user_psw: { type: String, required: true },
     user_hash: { type: String, required: true },
     user_createdAt: { type: Date, default: Date.now() },

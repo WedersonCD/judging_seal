@@ -33,17 +33,21 @@ UserController.createUser = async (req, res) => {
     console.log('creating new user...')
     try {
 
+        const user_email = req.body.user_email;
         const user_name = req.body.user_name;
         const user_psw = req.body.user_psw;
+        const user_nickName = req.body.user_nickName || req.body.user_name
 
         const newUser = new UserModel({
+            user_email: user_email,
             user_name: user_name,
+            user_nickName: user_nickName,
             user_psw: await UTILS.hashText(user_psw),
-            user_hash: await UTILS.hashText([user_name, user_psw])
+            user_hash: await UTILS.hashText([user_email, user_psw])
         });
 
         const savedUser = await newUser.save();
-        const token = jwt.sign({ user_name: user_name, user_psw: user_psw }, process.env.JWT_SECRET);
+        const token = jwt.sign({ user_email: user_email, user_psw: user_psw }, process.env.JWT_SECRET);
 
         res.cookie('user_token', token);
         res.status(201).json({ user: savedUser, token: token });
@@ -54,14 +58,13 @@ UserController.createUser = async (req, res) => {
 
 };
 
-
 UserController.loginUser = async (req, res) => {
     console.log('Loggin user..');
-    const user_name = req.body.user_name;
+    const user_email = req.body.user_email;
     const user_psw = req.body.user_psw;
 
     try {
-        const logged_user = await UserModel.findOne({ user_name: user_name });
+        const logged_user = await UserModel.findOne({ user_email: user_email });
 
         if (!logged_user)
             return res.status(404).json({ message: 'login fail, user not found' });
@@ -71,7 +74,7 @@ UserController.loginUser = async (req, res) => {
         if (!user_psw_match)
             return res.status(401).json({ message: 'Password not matched' });
 
-        const token = jwt.sign({ user_name: user_name, user_psw: user_psw }, process.env.JWT_SECRET);
+        const token = jwt.sign({ user_email: user_email, user_psw: user_psw }, process.env.JWT_SECRET);
 
         res.cookie('user_token', token);
         res.status(201).json({ user: logged_user, token: token });
@@ -82,6 +85,5 @@ UserController.loginUser = async (req, res) => {
     }
 
 }
-
 
 export default  UserController;
